@@ -4,7 +4,11 @@ import android.content.Context
 import androidx.room.Room
 import com.telda.movieApp.BuildConfig
 import com.telda.movieApp.data.api.ApiService
+import com.telda.movieApp.data.local.dao.MovieDao
+import com.telda.movieApp.data.local.database.MovieDatabase
 import com.telda.movieApp.data.repository.MovieRepositoryImpl
+import com.telda.movieApp.data.repository.MovieRepositoryImplLocal
+import com.telda.movieApp.domain.repository.LocalMovieRepository
 import com.telda.movieApp.domain.repository.MovieRepository
 import com.telda.movieApp.domain.usecase.FetchPopularMoviesUseCase
 import com.telda.movieApp.domain.usecase.MarkMoviesWithWatchlistStatusUseCase
@@ -82,7 +86,6 @@ object AppModule {
         return appContext
     }
 
-
     @Provides
     @Singleton
     fun provideMovieDatabase(appContext: Context): MovieDatabase {
@@ -148,6 +151,4 @@ object AppModule {
             ioDispatcher = ioDispatcher
         )
     }
-
-
 }
