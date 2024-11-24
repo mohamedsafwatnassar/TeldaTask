@@ -6,18 +6,8 @@ data class MovieDetails(
     val overview: String,
     val tagline: String,
     val releaseDate: String,
-    val runtime: Int,
-    val revenue: Int,
-    val budget: Int,
-    val voteAverage: Double,
     val posterPath: String?,
-    val backdropPath: String?,
-    val genres: List<Genre>,
-    val productionCompanies: List<ProductionCompany>,
-    val productionCountries: List<String>,
-    val spokenLanguages: List<String>,
     val status: String,
-    val homepage: String?,
     var watchlist:Boolean = false
 )
 

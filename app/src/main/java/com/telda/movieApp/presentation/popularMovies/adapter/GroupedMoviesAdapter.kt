@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.telda.movieApp.R
-import com.telda.movieApp.databinding.ItemFormFieldBinding
-import com.telda.movieApp.databinding.ItemYearFieldBinding
+import com.telda.movieApp.databinding.ItemHeadlineBinding
+import com.telda.movieApp.databinding.ItemMovieBinding
 import com.telda.movieApp.domain.model.GroupedMovies
 import com.telda.movieApp.domain.model.Movie
 import com.telda.movieApp.util.Constant
@@ -29,7 +29,7 @@ class GroupedMoviesAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             VIEW_TYPE_HEADER -> {
-                val binding = ItemYearFieldBinding.inflate(
+                val binding = ItemHeadlineBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -38,7 +38,7 @@ class GroupedMoviesAdapter(
             }
 
             VIEW_TYPE_ITEM -> {
-                val binding = ItemFormFieldBinding.inflate(
+                val binding = ItemMovieBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -66,23 +66,21 @@ class GroupedMoviesAdapter(
     /**
      * ViewHolder for year headers.
      */
-    inner class YearHeaderViewHolder(private val binding: ItemYearFieldBinding) :
+    inner class YearHeaderViewHolder(private val binding: ItemHeadlineBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(year: Int) {
-            binding.txtYear.text = year.toString()
+            binding.headline.text = year.toString()
         }
     }
 
     /**
      * ViewHolder for movie items.
      */
-    inner class MovieViewHolder(private val binding: ItemFormFieldBinding) :
+    inner class MovieViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
             binding.title.text = movie.title
             binding.overview.text = movie.overview
-            // binding.releaseYear.text = movie.releaseYear.toString()
-            // imageUrl =  Constant.BASE_IMAGE_URL + movie.posterPath
 
             val moviePosterUrl = Constant.BASE_IMAGE_URL + movie.posterPath
 
@@ -91,7 +89,7 @@ class GroupedMoviesAdapter(
                 .into(binding.imgMovie)
 
             binding.watchlist.setImageResource(
-                if (movie.watchlist) R.drawable.ic_favorite else R.drawable.ic_not_favorite
+                if (movie.watchlist) R.drawable.ic_watch_list else R.drawable.ic_not_watch_list
             )
 
             binding.root.setOnClickListener {

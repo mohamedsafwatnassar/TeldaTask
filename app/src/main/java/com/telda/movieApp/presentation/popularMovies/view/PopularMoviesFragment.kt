@@ -7,14 +7,17 @@ import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.telda.android_task.presentation.base.BaseFragment
+import com.telda.movieApp.R
 import com.telda.movieApp.databinding.FragmentPopularMoviesBinding
 import com.telda.movieApp.domain.model.Movie
 import com.telda.movieApp.presentation.popularMovies.adapter.GroupedMoviesAdapter
 import com.telda.movieApp.presentation.popularMovies.viewmodel.MoviesViewModel
 import com.telda.movieApp.util.LoadingErrorState
+import com.telda.movieApp.util.extention.customNavigate
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -27,7 +30,7 @@ class PopularMoviesFragment : BaseFragment() {
     private var _binding: FragmentPopularMoviesBinding? = null
     private val binding get() = _binding!!
 
-    // ViewModels to interact with data for movies, similar movies, and movie details
+    // ViewModels to interact with data for movies
     private val moviesViewModel: MoviesViewModel by viewModels()
 
     // Adapter for displaying movies in a grouped format
@@ -64,7 +67,7 @@ class PopularMoviesFragment : BaseFragment() {
             ::handleOnWishListMovieClick
         )  // Create adapter
 
-        binding.rcvw.apply {
+        binding.rvPopularMovies.apply {
             adapter = groupedMoviesAdapter  // Set the adapter to the RecyclerView
             addOnScrollListener(createScrollListener())  // Add scroll listener for pagination
         }
@@ -79,7 +82,7 @@ class PopularMoviesFragment : BaseFragment() {
     private fun handleOnMovieClick(movie: Movie) {
         val bundle = Bundle()
         bundle.putInt("movie_id", movie.id)
-        // findNavController().customNavigate(R.id.mo)
+        findNavController().customNavigate(R.id.MovieDetailsFragment, bundle)
     }
 
     // Handle the movie click, which toggles the movie's watchlist status

@@ -8,15 +8,15 @@
     <fragment
         android:id="@+id/PopularMoviesFragment"
         android:name="com.telda.movieApp.presentation.popularMovies.view.PopularMoviesFragment"
-        android:label="Popular Movies"
+        android:label="@string/popular_movies"
         tools:layout="@layout/fragment_popular_movies">
 
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.telda.movieApp.SecondFragment"
-        android:label=" "
-        tools:layout="@layout/fragment_second">
+        android:id="@+id/MovieDetailsFragment"
+        android:name="com.telda.movieApp.presentation.movieDetails.view.MovieDetailsFragment"
+        android:label="@string/movie_details"
+        tools:layout="@layout/fragment_movie_details">
 
     </fragment>
 </navigation>

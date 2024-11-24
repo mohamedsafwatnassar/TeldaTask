@@ -18,19 +18,8 @@ object MovieDetailsMapper {
             overview = this.overview.orEmpty(),
             tagline = this.tagline.orEmpty(),
             releaseDate = this.releaseDate.orEmpty(),
-            runtime = this.runtime ?: 0,
-            revenue = this.revenue ?: 0,
-            budget = this.budget ?: 0,
-            voteAverage = (this.voteAverage as? Double) ?: 0.0,
             posterPath = this.posterPath,
-            backdropPath = this.backdropPath,
-            genres = this.genres?.mapNotNull { it?.toDomain() } ?: emptyList(),
-            productionCompanies = this.productionCompanies?.mapNotNull { it?.toDomain() }
-                ?: emptyList(),
-            productionCountries = this.productionCountries?.mapNotNull { it?.name }.orEmpty(),
-            spokenLanguages = this.spokenLanguages?.mapNotNull { it?.name }.orEmpty(),
             status = this.status.orEmpty(),
-            homepage = this.homepage
         )
     }
 
