@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".presentation.movieDetails.view.MovieDetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_4x"
+            android:layout_marginTop="@dimen/space_4x"
+            android:gravity="start"
+            android:padding="@dimen/space_1x"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/imgMovie"
+            app:layout_constraintEnd_toStartOf="@+id/watchlist"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Welcome welcome welcome welcome" />
+
+        <ImageView
+            android:id="@+id/watchlist"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="@dimen/space_4x"
+            android:padding="@dimen/space_1x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/title"
+            app:layout_constraintTop_toTopOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="@id/title"
+            tools:src="@drawable/ic_watch_list" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgMovie"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="@dimen/space_4x"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@id/status"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:shapeAppearance="@style/roundedCornersImageView"
+            tools:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_2x"
+            android:gravity="start"
+            android:padding="@dimen/space_1x"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/imgMovie"
+            app:layout_constraintTop_toBottomOf="@id/imgMovie"
+            tools:text="Status: Released" />
+
+        <TextView
+            android:id="@+id/releaseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:textColor="@color/colorText"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/status"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/status"
+            tools:text="2024-09-12" />
+
+        <TextView
+            android:id="@+id/tagline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_4x"
+            android:layout_marginTop="@dimen/space_1x"
+            android:textColor="@color/colorText"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/status"
+            tools:text="tagline tagline tagline tagline" />
+
+        <TextView
+            android:id="@+id/overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_4x"
+            android:layout_marginTop="@dimen/space_2x"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tagline"
+            tools:text="Very excited to share my latest shots. This time I made shots about the cinema booking app. Let me know what you think about this. I hope you like it. Feel free to feedback and please press if you like it ❤ Enjoy!" />
+
+        <TextView
+            android:id="@+id/txtSimilarMovies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_4x"
+            android:layout_marginTop="@dimen/space_3x"
+            android:text="@string/similar_movies"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/overview" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSimilarMovies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/rvMovieCredit"
+            app:layout_constraintTop_toBottomOf="@id/txtSimilarMovies"
+            tools:listitem="@layout/item_similar_movie" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMovieCredit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_4x"
+            android:layout_marginBottom="@dimen/space_4x"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rvSimilarMovies"
+            tools:listitem="@layout/item_movie_credit" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
