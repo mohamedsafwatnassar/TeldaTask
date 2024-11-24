@@ -1,0 +1,177 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-parcelize'
+}
+
+android {
+    namespace 'com.telda.movieApp'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.telda.movieApp"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            shrinkResources false
+            minifyEnabled false
+            debuggable false
+            resValue "string", "authority", "com.telda.android_task.provider"
+            resValue "string", "app_name", "Telda task"
+            manifestPlaceholders = [appIcon: "@drawable/new_icon", appIconRound: "@drawable/new_icon"]
+            buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+            buildConfigField("String", "BASE_IMAGE_URL", "\"https://image.tmdb.org/t/p/w500/\"")
+            buildConfigField("String", "API_KEY", "\"1ff44aabe867a9eb198ad100d7167020\"")
+            buildConfigField("String", "ACCESS_TOKEN", "\"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZmY0NGFhYmU4NjdhOWViMTk4YWQxMDBkNzE2NzAyMCIsIm5iZiI6MTczMjMwMzc0MC4yMTg1LCJzdWIiOiI2NzQwZGE4ODdiODI1ZTY4NWI0ZTM1NmEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.heP2OJKp0nmMaq_mpKm3Y1xjAEXLkvyXYxVH4crPczQ\"")
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            shrinkResources false
+            minifyEnabled false
+            debuggable true
+            versionNameSuffix "-dev"
+            applicationIdSuffix ".dev"
+            resValue "string", "authority", "com.telda.android_task.dev.provider"
+            resValue "string", "app_name", "Telda task Dev"
+            manifestPlaceholders = [appIcon: "@drawable/ic_logo_dev", appIconRound: "@drawable/ic_logo_dev"]
+            buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+            buildConfigField("String", "BASE_IMAGE_URL", "\"https://image.tmdb.org/t/p/w500/\"")
+            buildConfigField("String", "API_KEY", "\"1ff44aabe867a9eb198ad100d7167020\"")
+            buildConfigField("String", "ACCESS_TOKEN", "\"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZmY0NGFhYmU4NjdhOWViMTk4YWQxMDBkNzE2NzAyMCIsIm5iZiI6MTczMjMwMzc0MC4yMTg1LCJzdWIiOiI2NzQwZGE4ODdiODI1ZTY4NWI0ZTM1NmEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.heP2OJKp0nmMaq_mpKm3Y1xjAEXLkvyXYxVH4crPczQ\"")
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+        }
+    }
+
+    flavorDimensions "platform"
+    productFlavors {
+        google {
+            dimension "platform"
+            applicationId "com.telda.android_task"
+        }
+
+        huawei {
+            dimension "platform"
+            applicationId "com.telda.android_task.huawei"
+            versionCode 179
+            versionName "3.7.1"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+        buildConfig = true
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+
+    // JUnit
+    testImplementation 'junit:junit:4.13.2'
+
+    // Mockito for mocking
+    testImplementation 'org.mockito:mockito-core:4.6.1'
+    testImplementation 'org.mockito.kotlin:mockito-kotlin:4.0.0'
+
+    // MockK for unit tests
+    testImplementation "io.mockk:mockk:1.13.9" // Replace with latest version
+
+    // Coroutines Test for testing coroutine-based code
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
+
+    // AndroidX Test for Android-related testing utilities (optional)
+    testImplementation 'androidx.arch.core:core-testing:2.2.0'
+    testImplementation 'androidx.test.ext:junit:1.1.3'
+    testImplementation 'androidx.test:core:1.4.0'
+
+    // navigation Component
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.8.4'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.8.4'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.5'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.5'
+
+    // retrofit Component
+    implementation 'com.squareup.retrofit2:retrofit:2.11.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0"
+    implementation "com.squareup.okhttp3:okhttp:4.9.3"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
+
+    // RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    // dagger hilt
+    implementation "com.google.dagger:hilt-android:2.51.1"
+    kapt "com.google.dagger:hilt-compiler:2.51.1"
+
+    // Room dependencies
+    implementation "androidx.room:room-runtime:2.6.0" // check for latest version
+    annotationProcessor "androidx.room:room-compiler:2.6.0" // For Java users
+    kapt "androidx.room:room-compiler:2.6.0" // For Kotlin users
+
+    // For coroutine support with Room
+    implementation "androidx.room:room-ktx:2.6.0"
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+
+    ///////////////////////////////////////// GOOGLE DEPENDENCIES /////////////////////////////////////////
+
+//        // firebase
+//        googleImplementation(platform("com.google.firebase:firebase-bom:33.2.0"))
+//        googleImplementation 'com.google.firebase:firebase-analytics-ktx'
+//        googleImplementation 'com.google.firebase:firebase-messaging-ktx'
+//        googleImplementation 'com.google.firebase:firebase-crashlytics-ktx'
+//        googleImplementation 'com.google.firebase:firebase-perf-ktx'
+//
+//        // maps & location
+//        googleImplementation 'com.google.android.gms:play-services-maps:19.0.0'
+//        googleImplementation 'com.google.android.gms:play-services-location:21.3.0'
+//
+//
+//        ///////////////////////////////////////// HUAWEI DEPENDENCIES /////////////////////////////////////////
+//
+//        huaweiImplementation 'com.huawei.hms:base:6.11.0.302'
+//
+//        huaweiImplementation 'com.onesignal:OneSignal:[4.8.10, 4.99.99]'
+//        // Maps && Locations
+//        huaweiImplementation 'com.huawei.hms:maps:6.11.2.301'
+//
+//        huaweiImplementation 'com.huawei.hms:maps-basic:6.11.2.301'
+//
+//        huaweiImplementation 'com.huawei.hms:location:6.4.0.300'
+//        huaweiImplementation 'com.huawei.hms:hwid:6.1.0.300'
+//        huaweiImplementation 'com.huawei.agconnect:agconnect-crash:1.5.1.300'
+}
