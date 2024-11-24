@@ -10,6 +10,15 @@ android {
     namespace 'com.telda.movieApp'
     compileSdk 34
 
+    signingConfigs {
+        release {
+            storeFile file('/home/mohamednassar/TeldaTask/TeldaTask.jks')
+            storePassword 'Mm123456'
+            keyPassword 'Mm123456'
+            keyAlias 'key0'
+        }
+    }
+
     defaultConfig {
         applicationId "com.telda.movieApp"
         minSdk 26
