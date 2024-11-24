@@ -34,7 +34,7 @@ android {
             shrinkResources false
             minifyEnabled false
             debuggable false
-            resValue "string", "authority", "com.telda.android_task.provider"
+            resValue "string", "authority", "com.telda.movieApp.provider"
             resValue "string", "app_name", "Telda task"
             manifestPlaceholders = [appIcon: "@drawable/new_icon", appIconRound: "@drawable/new_icon"]
             buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
@@ -50,7 +50,7 @@ android {
             debuggable true
             versionNameSuffix "-dev"
             applicationIdSuffix ".dev"
-            resValue "string", "authority", "com.telda.android_task.dev.provider"
+            resValue "string", "authority", "com.telda.movieApp.dev.provider"
             resValue "string", "app_name", "Telda task Dev"
             manifestPlaceholders = [appIcon: "@drawable/ic_logo_dev", appIconRound: "@drawable/ic_logo_dev"]
             buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
