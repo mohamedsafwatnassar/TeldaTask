@@ -1,3 +1,40 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="space_0x">0dp</dimen>
+    <dimen name="space_0_5x">2dp</dimen>
+    <dimen name="space_1x">4dp</dimen>
+    <dimen name="space_1_5x">6dp</dimen>
+    <dimen name="space_2x">8dp</dimen>
+    <dimen name="space_2_5x">10dp</dimen>
+    <dimen name="space_3x">12dp</dimen>
+    <dimen name="space_3.5x">14dp</dimen>
+    <dimen name="space_4x">16dp</dimen>
+    <dimen name="space_4.5x">18dp</dimen>
+    <dimen name="space_5x">20dp</dimen>
+    <dimen name="space_6x">24dp</dimen>
+    <dimen name="space_7x">28dp</dimen>
+    <dimen name="space_8x">32dp</dimen>
+    <dimen name="space_9x">36dp</dimen>
+    <dimen name="space_10x">40dp</dimen>
+    <dimen name="space_11x">44dp</dimen>
+    <dimen name="space_12x">48dp</dimen>
+    <dimen name="space_13x">52dp</dimen>
+    <dimen name="space_14x">56dp</dimen>
+    <dimen name="space_15x">60dp</dimen>
+    <dimen name="space_16x">64dp</dimen>
+    <dimen name="space_18x">72dp</dimen>
+
+    <dimen name="space_20x">80dp</dimen>
+    <dimen name="space_22x">88dp</dimen>
+    <dimen name="space_24x">96dp</dimen>
+
+    <dimen name="space_30x">120dp</dimen>
+    <dimen name="space_40x">160dp</dimen>
+    <dimen name="space_45x">180dp</dimen>
+    <dimen name="space_50x">200dp</dimen>
+    <dimen name="space_55x">220dp</dimen>
+    <dimen name="space_62x">248dp</dimen>
+    <dimen name="space_100x">400dp</dimen>
+
+
+    <dimen name="app_bar_height">@dimen/space_15x</dimen>
 </resources>

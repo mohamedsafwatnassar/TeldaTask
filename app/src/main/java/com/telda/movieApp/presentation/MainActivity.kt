@@ -1,4 +1,4 @@
-package com.telda.movieApp
+package com.telda.movieApp.presentation
 
 import android.content.Context
 import android.content.res.Configuration
