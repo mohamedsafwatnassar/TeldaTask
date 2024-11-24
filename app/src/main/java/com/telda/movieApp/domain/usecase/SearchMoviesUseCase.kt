@@ -13,6 +13,7 @@ import javax.inject.Inject
 
 class SearchMoviesUseCase @Inject constructor(
     private val repository: MovieRepository,
+    private val markMoviesWithWatchlistStatusUseCase: MarkMoviesWithWatchlistStatusUseCase,
     private val ioDispatcher: CoroutineDispatcher // Inject dispatcher for better testing and flexibility,
 ) {
 
@@ -45,6 +46,9 @@ class SearchMoviesUseCase @Inject constructor(
             when (dataState) {
                 is DataState.Success -> {
                     val movies = dataState.data
+
+                    val updatedMovies = markMoviesWithWatchlistStatusUseCase.markMoviesWithWatchlistStatus(movies)
+                    allMovies.addAll(updatedMovies)
 
                     // Group the movies by release year
                     val groupedMovies = groupMoviesByYear(allMovies)
