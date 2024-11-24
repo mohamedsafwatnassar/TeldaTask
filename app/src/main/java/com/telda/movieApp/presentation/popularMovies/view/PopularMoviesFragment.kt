@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.telda.android_task.presentation.base.BaseFragment
 import com.telda.movieApp.databinding.FragmentPopularMoviesBinding
 import com.telda.movieApp.domain.model.Movie
-import com.telda.movieApp.presentation.firstScreen.adapter.GroupedMoviesAdapter
+import com.telda.movieApp.presentation.popularMovies.adapter.GroupedMoviesAdapter
 import com.telda.movieApp.presentation.popularMovies.viewmodel.MoviesViewModel
 import com.telda.movieApp.util.LoadingErrorState
 import dagger.hilt.android.AndroidEntryPoint
