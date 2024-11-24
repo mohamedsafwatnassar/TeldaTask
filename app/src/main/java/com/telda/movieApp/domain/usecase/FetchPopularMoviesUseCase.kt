@@ -5,11 +5,15 @@ import com.telda.movieApp.domain.model.Movie
 import com.telda.movieApp.domain.repository.MovieRepository
 import com.telda.movieApp.util.DataState
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class FetchPopularMoviesUseCase @Inject constructor(
     private val repository: MovieRepository,
+    private val markMoviesWithWatchlistStatusUseCase: MarkMoviesWithWatchlistStatusUseCase,
     private val ioDispatcher: CoroutineDispatcher // Inject dispatcher for better testing and flexibility,
 ) {
 
@@ -44,6 +48,10 @@ class FetchPopularMoviesUseCase @Inject constructor(
             is DataState.Success -> {
                 val movies = dataState.data
 
+                val updatedMovies =
+                    markMoviesWithWatchlistStatusUseCase.markMoviesWithWatchlistStatus(movies)
+                allMovies.addAll(updatedMovies)
+
                 // Group movies by year and return success state
                 val groupedMovies = groupMoviesByYear(allMovies)
                 isLastPage = movies.isEmpty() // Mark last page if no more movies
@@ -51,18 +59,22 @@ class FetchPopularMoviesUseCase @Inject constructor(
 
                 DataState.Success(groupedMovies)
             }
+
             is DataState.Error -> {
                 // Return error state
                 DataState.Error(dataState.error)
             }
+
             DataState.Idle -> {
                 // Return idle state when no movies left
                 DataState.Idle
             }
+
             DataState.Processing -> {
                 // Return processing state
                 DataState.Processing
             }
+
             DataState.ServerError -> {
                 // Return server error state
                 DataState.ServerError

@@ -1,10 +1,14 @@
 package com.telda.movieApp.di
 
 import android.content.Context
+import androidx.room.Room
 import com.telda.movieApp.BuildConfig
 import com.telda.movieApp.data.api.ApiService
 import com.telda.movieApp.data.repository.MovieRepositoryImpl
 import com.telda.movieApp.domain.repository.MovieRepository
+import com.telda.movieApp.domain.usecase.FetchPopularMoviesUseCase
+import com.telda.movieApp.domain.usecase.MarkMoviesWithWatchlistStatusUseCase
+import com.telda.movieApp.domain.usecase.SearchMoviesUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -78,10 +82,72 @@ object AppModule {
         return appContext
     }
 
+
+    @Provides
+    @Singleton
+    fun provideMovieDatabase(appContext: Context): MovieDatabase {
+        return Room.databaseBuilder(
+            appContext,
+            MovieDatabase::class.java,
+            "movie_database"
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieDao(database: MovieDatabase): MovieDao {
+        return database.movieDao()
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideLocalMoviesRepository(dao: MovieDao): LocalMovieRepository {
+        return MovieRepositoryImplLocal(dao)
+    }
+
     @Provides
     @Singleton
     fun provideIODispatcher(): CoroutineDispatcher {
         return Dispatchers.IO
     }
+
+
+    @Provides
+    @Singleton
+    fun provideMarkMoviesWithWatchlistStatusUseCase(
+        localRepository: LocalMovieRepository
+    ): MarkMoviesWithWatchlistStatusUseCase {
+        return MarkMoviesWithWatchlistStatusUseCase(localRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchMoviesUseCase(
+        movieRepository: MovieRepository,
+        markMoviesWithWatchlistStatusUseCase: MarkMoviesWithWatchlistStatusUseCase,
+        ioDispatcher: CoroutineDispatcher = Dispatchers.IO // Provide default dispatcher
+    ): SearchMoviesUseCase {
+        return SearchMoviesUseCase(
+            repository = movieRepository,
+            markMoviesWithWatchlistStatusUseCase = markMoviesWithWatchlistStatusUseCase,
+            ioDispatcher = ioDispatcher
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideFetchPopularMoviesUseCase(
+        movieRepository: MovieRepository,
+        markMoviesWithWatchlistStatusUseCase: MarkMoviesWithWatchlistStatusUseCase,
+        ioDispatcher: CoroutineDispatcher = Dispatchers.IO // Provide default dispatcher
+    ): FetchPopularMoviesUseCase {
+        return FetchPopularMoviesUseCase(
+            repository = movieRepository,
+            markMoviesWithWatchlistStatusUseCase = markMoviesWithWatchlistStatusUseCase,
+            ioDispatcher = ioDispatcher
+        )
+    }
+
 
 }
